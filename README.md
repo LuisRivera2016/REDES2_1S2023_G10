@@ -46,3 +46,4 @@ se tomo como referencia el SW3 y se apago la interfaz 0/1;
 el tiempo que tomo el protocolo en escoger una ruta alternativa fue de 
 de un aproximado de 38 segundos
 
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/convergencia%202.png)
