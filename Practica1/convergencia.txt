@@ -1,0 +1,6 @@
+para la prueba de convergencia se realizo un ping extendido
+desde la maquina con direccion ip 192.168.20.2 perteneciente al grupo de PRIMARIA
+hacia la maquina con direccion 192.168.20.3
+se tomo como referencia el SW3 y se apago la interfaz 0/1; 
+el tiempo que tomo el protocolo en escoger una ruta alternativa fue de 
+de un aproximado de 38 segundos

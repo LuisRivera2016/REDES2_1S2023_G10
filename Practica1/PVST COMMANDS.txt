@@ -1,0 +1,5 @@
+sh spanning-tree 
+#shows the configuration of spanning-three
+
+spanning-tree mode pvst
+#asigns pvst mode to the spanning-tree
