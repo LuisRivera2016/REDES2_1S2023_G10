@@ -57,4 +57,4 @@ con el comando:
 spanning-tree mode rapid-pvst
 ```
 
-[](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/SW1_Rpvst.jpg)
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/SW1_Rpvst.jpg)
