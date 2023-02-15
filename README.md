@@ -47,3 +47,14 @@ el tiempo que tomo el protocolo en escoger una ruta alternativa fue de
 de un aproximado de 38 segundos
 
 ![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/convergencia%202.png)
+
+2. Escenario Rapid PVST
+
+Para la prueba de Convergencia primero se cambio el modo spanning-tree de todos los switch
+con el comando:
+
+```sh
+spanning-tree mode rapid-pvst
+```
+
+[](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/SW1_Rpvst.jpg)
