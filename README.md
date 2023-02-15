@@ -249,3 +249,6 @@ no shutdown
 
 El tiempo que les tomo en los tres casos fue de aproximadamente 1 segundo.
 Por lo que se eligio este protocolo para implementarlo en la practica.
+
+## Seguridad de Interfaces de Red
+### Seguridad para interfaces asignadas a la VLAN
