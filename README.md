@@ -32,14 +32,178 @@
 
 - **_spanning-tree mode pvst_** : asigna el tipo de spanning-tree asociado al protocolo
 
+## Topologia
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/Topologia.jpg)
 
+## Configuracion Topologia
+### SW3 (Server)
 
+```sh
+enable
+configure terminal
+```
+Configurar Interfaces en Modo Trunk
+```sh
+interface range fastethernet 0/1-2
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+```
+
+Configurar VTP
+```sh
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode server
+exit
+```
+
+Configuracion de VLANS
+```sh
+vlan 20
+name PRIMARIA
+exit
+
+vlan 30
+name BASICOS
+exit
+
+vlan 40
+name DIVERSIFICADO
+exit
+```
+
+Configuracion de Interfaces en Modo Acces
+```sh
+interface fastEthernet 0/5
+switchport mode access 
+switchport access vlan 30
+exit
+
+interface fastEthernet 0/4
+switchport mode access 
+switchport access vlan 20
+exit
+
+interface fastEthernet 0/3
+switchport mode access 
+switchport access vlan 40
+exit
+```
+
+### SW1
+Configuracion de Interfaces en Modo Trunk
+```sh
+interface range fastethernet 0/1-4
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+```
+
+Configuracion del VTP
+```sh
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+```
+
+Configuracion de Interfaces en Modo Acces
+```sh
+interface fastEthernet 0/5
+switchport mode access 
+switchport access vlan 20
+exit
+```
+
+### SW2
+Configuracion de Interfaces en Modo Trunk
+```sh
+interface range fastethernet 0/1-2
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+```
+
+Configuracion del VTP
+```sh
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+```
+
+Configuracion de Interfaces en Modo Acces
+```sh
+interface range fastEthernet 0/3-4
+switchport mode access 
+switchport access vlan 40
+exit
+```
+
+### SW4
+Configuracion de Interfaces en Modo Trunk
+```sh
+interface range fastethernet 0/1-2
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+```
+
+Configuracion del VTP
+```sh
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+```
+
+Configuracion de Interfaces en Modo Acces
+```sh
+interface range fastEthernet 0/3-4
+switchport mode access 
+switchport access vlan 30
+exit
+```
+
+### SW5
+Configuracion de Interfaces en Modo Trunk
+```sh
+interface range fastethernet 0/1-4
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+```
+
+Configuracion del VTP
+```sh
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+```
+
+Configuracion de Interfaces en Modo Acces
+```sh
+interface fastEthernet 0/5
+switchport mode access 
+switchport access vlan 20
+exit
+```
 
 ## Elección de escenario con mejor resultado de convergencia
 
 1.  Escenario PVST
 
 para la prueba de convergencia se realizo un ping extendido
+```sh
+ping -t 192.168.20.3
+```
 desde la maquina con direccion ip 192.168.20.2 perteneciente al grupo de PRIMARIA
 hacia la maquina con direccion 192.168.20.3
 se tomo como referencia el SW3 y se apago la interfaz 0/1; 
