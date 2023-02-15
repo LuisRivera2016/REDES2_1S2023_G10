@@ -58,3 +58,30 @@ spanning-tree mode rapid-pvst
 ```
 
 ![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/SW1_Rpvst.jpg)
+
+Luego de eso se procedio a hacer ping entre dos computadoras de la misma VLAN para posteriormente 
+apagar un puerto del switch seleccionado para poder ver en cuanto tiempo escoge una ruta alternativa.
+
+```sh
+conf t
+int f0/1
+shutdown
+no shutdown
+```
+### Vlan Primaria
+
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/PRIMARIA_SHUTDOWN.jpg)
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/PRIMARIA_RPVST.jpg)
+
+### Vlan Basicos
+
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/basicos_SHUTDOWN.jpg)
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/BASICOS_RPVST.jpg)
+
+### Vlan Diversificado
+
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/DIVERSIFICADO_shutdown.jpg)
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/DIVERSIFICADO_PVST.jpg)
+
+El tiempo que les tomo en los tres casos fue de aproximadamente 1 segundo.
+Por lo que se eligio este protocolo para implementarlo en la practica.
