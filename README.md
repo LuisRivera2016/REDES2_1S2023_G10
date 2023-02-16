@@ -200,7 +200,18 @@ exit
 
 1.  Escenario PVST
 
-para la prueba de convergencia se realizo un ping extendido
+Antes de realizar la prueba debemos localizar cual de nuestros dispositivos es el denomindado "root".
+Para ello debemos ejecutar el siguiente comando:
+
+```
+sh spanning-three
+```
+al momento de ejectuar el comando, podremos visualizar elementos descriptivos al protocolo, entre ellos la proximidad, el costo, la direccion, etc.
+Entre esos datos la consola nos mostrara cual es el dispositivo raiz como podemos observar en la siguiente imagen.
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/raiz.png)
+
+Ya al tener identificado nuestro dispositivo raiz realizamos nuestra pueba de convergencia.
+Para la prueba se realizo un ping extendido
 ```sh
 ping -t 192.168.20.3
 ```
@@ -211,6 +222,11 @@ el tiempo que tomo el protocolo en escoger una ruta alternativa fue de
 de un aproximado de 38 segundos
 
 ![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/convergencia%202.png)
+
+se realizo el mismo procedimiento anterior con las redes faltantes
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/convergencia3.png)
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/convergencia4.png)
+y el tiempo que tomo el protocolo variaba de 1+- segundos con respecto a la red PRIMARIA.
 
 2. Escenario Rapid PVST
 
