@@ -267,4 +267,117 @@ El tiempo que les tomo en los tres casos fue de aproximadamente 1 segundo.
 Por lo que se eligio este protocolo para implementarlo en la practica.
 
 ## Seguridad de Interfaces de Red
+### Políticas de puerto compartidas
+
+Para activar el port-security en cualquier switch, se debe desactivar la negociación automática de los puertos truncales (Dynamic Trunking Protocol DTP), para esto se debe configurar explícitamente el modo acceso en las interfaces correspondientes, esto ya se hizo en la [configuración de la topologia](#configuracion-topologia).
+
 ### Seguridad para interfaces asignadas a la VLAN
+
+Ahora, se debe activar el port-security en las interfaces de interés, y luego se debe configurar dicha funcionalidad para que permita el tráfico únicamente de las siguientes direcciones MAC:
+
+### SW1
+| Interfaz | VLAN | Tipo de dispositivo | Dirección IP | Dirección MAC |
+| --- | --- | --- | --- | --- |
+| f0/5 | 20 | Laptop | 192.168.20.2 | 0060.705D.C289 |
+
+### SW2
+| Interfaz | VLAN | Tipo de dispositivo | Dirección IP | Dirección MAC |
+| --- | --- | --- | --- | --- |
+| f0/3 | 40 | Desktop | 192.168.40.2 | 0030.A394.42BC |
+| f0/4 | 40 | Desktop | 192.168.40.3 | 0050.0F73.5214 |
+
+### SW3
+| Interfaz | VLAN | Tipo de dispositivo | Dirección IP | Dirección MAC |
+| --- | --- | --- | --- | --- |
+| f0/3 | 40 | Desktop | 192.168.40.4 | 0090.2BD7.982E |
+| f0/4 | 20 | Desktop | 192.168.20.3 | 0007.EC1A.7361 |
+| f0/5 | 30 | Laptop | 192.168.30.2 | 0000.0C38.A2CD |
+
+### SW4
+| Interfaz | VLAN | Tipo de dispositivo | Dirección IP | Dirección MAC |
+| --- | --- | --- | --- | --- |
+| f0/3 | 30 | Laptop | 192.168.30.3 | 0060.70CC.8060 |
+| f0/4 | 30 | Laptop | 192.168.30.4 | 00E0.A35E.AAA3 |
+
+### SW5
+| Interfaz | VLAN | Tipo de dispositivo | Dirección IP | Dirección MAC |
+| --- | --- | --- | --- | --- |
+| f0/5 | 20 | Desktop | 192.168.20.4 | 0060.3E4D.0988 |
+
+Para hacer esto se deben ejecutar en cada interfaz en modo acceso, los siguientes comandos:
+
+```sh
+conf t
+int f0/<numero-de-interfaz>
+switchport port-security
+switchport port-security mac-address <MAC-address>
+exit
+```
+
+### SW1
+```sh
+conf t
+int f0/5
+switchport port-security
+switchport port-security mac-address 0060.705D.C289
+exit
+```
+
+### SW2
+```sh
+conf t
+int f0/3
+switchport port-security
+switchport port-security mac-address 0030.A394.42BC
+int f0/4
+switchport port-security
+switchport port-security mac-address 0050.0F73.5214
+exit
+```
+
+### SW3
+```sh
+conf t
+int f0/3
+switchport port-security
+switchport port-security mac-address 0090.2BD7.982E
+int f0/4
+switchport port-security
+switchport port-security mac-address 0007.EC1A.7361
+int f0/5
+switchport port-security
+switchport port-security mac-address 0000.0C38.A2CD
+exit
+```
+
+### SW4
+```sh
+conf t
+int f0/3
+switchport port-security
+switchport port-security mac-address 0060.70CC.8060
+int f0/4
+switchport port-security
+switchport port-security mac-address 00E0.A35E.AAA3
+exit
+```
+
+### SW5
+```sh
+conf t
+int f0/5
+switchport port-security
+switchport port-security mac-address 0060.3E4D.0988
+exit
+```
+
+Y se puede ilustrar de la siguiente forma:
+
+Activando port-security con MAC address en SW1, el proceso se repite para todos los demás switches según los comandos de arriba:
+![](img/port-security-SW1.png)
+
+Verificando que esté configurado correctamente el port-security por medio de `sh run`, el proceso se repite para todos los demás switches:
+![](img/port-security-sh-run-SW3.png)
+
+Verificando que el puerto se apagará en caso de una violación de seguridad por medio de `sh port-security interface f0/<numero-de-interfaz>`, el proceso se repite para todos los demás switches:
+![](img/port-security-violation-shutdown-SW1.png)
