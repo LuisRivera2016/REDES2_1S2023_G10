@@ -26,6 +26,11 @@
 
 - **_switchport mode access_** : este comando establece el puerto en modo acceso.
 
+- **_int port-channel <id>_** : este comando crea un port-channel con el id especificado si no existe y entra a su modo de configuración.
+
+- **_channel-group <id> mode <on/active>_** : este comando debe aplicarse a una interfaz fisica o a un rango de interfaces fisicas, y se añadiran las interfaces al port-channel en el modo especificado, el modo on es el modo default que es pasivo y el active hace negociaciones con otro switch de forma automatica.
+
+
 ## Configuracion Topologia
 
 ### MSW1
@@ -249,4 +254,89 @@ switchport mode access
 switchport access vlan 70
 description ACC_VLAN70
 exit
+```
+
+#Configuracion LACP
+Para configurar el link-aggregation, la definición del port-channel debe coincidir con la configuración de las interfaces físicas, en este caso del switchport y del modo acceso.
+
+##Huehuetenango
+###MSW1
+
+```sh
+ena
+conf t
+int port-channel 1
+switchport access vlan 70
+switchport mode access
+switchport nonegotiate
+
+int range f0/2-3
+channel-group 1 mode active
+```
+
+###SW1
+```sh
+ena
+conf t
+int port-channel 1
+switchport access vlan 70
+switchport mode access
+
+int range f0/5-6
+channel-group 1 mode active
+```
+
+
+##Petén
+###MSW2
+
+```sh
+ena
+conf t
+int port-channel 1
+switchport access vlan 70
+switchport mode access
+switchport nonegotiate
+
+int range f0/3-4
+channel-group 1 mode active
+```
+
+###SW2
+```sh
+ena
+conf t
+int port-channel 1
+switchport access vlan 70
+switchport mode access
+
+int range f0/3-4
+channel-group 1 mode active
+```
+
+##Alta Verapaz
+###MSW3
+
+```sh
+ena
+conf t
+int port-channel 1
+switchport access vlan 70
+switchport mode access
+switchport nonegotiate
+
+int range f0/3-4
+channel-group 1 mode active
+```
+
+###SW3
+```sh
+ena
+conf t
+int port-channel 1
+switchport access vlan 70
+switchport mode access
+
+int range f0/4-5
+channel-group 1 mode active
 ```
