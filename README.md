@@ -256,11 +256,11 @@ description ACC_VLAN70
 exit
 ```
 
-#Configuracion LACP
+# Configuracion LACP
 Para configurar el link-aggregation, la definición del port-channel debe coincidir con la configuración de las interfaces físicas, en este caso del switchport y del modo acceso.
 
-##Huehuetenango
-###MSW1
+## Huehuetenango
+### MSW1
 
 ```sh
 ena
@@ -274,7 +274,7 @@ int range f0/2-3
 channel-group 1 mode active
 ```
 
-###SW1
+### SW1
 ```sh
 ena
 conf t
@@ -287,8 +287,8 @@ channel-group 1 mode active
 ```
 
 
-##Petén
-###MSW2
+## Petén
+### MSW2
 
 ```sh
 ena
@@ -302,7 +302,7 @@ int range f0/3-4
 channel-group 1 mode active
 ```
 
-###SW2
+### SW2
 ```sh
 ena
 conf t
@@ -314,8 +314,8 @@ int range f0/3-4
 channel-group 1 mode active
 ```
 
-##Alta Verapaz
-###MSW3
+## Alta Verapaz
+### MSW3
 
 ```sh
 ena
@@ -329,7 +329,7 @@ int range f0/3-4
 channel-group 1 mode active
 ```
 
-###SW3
+### SW3
 ```sh
 ena
 conf t
