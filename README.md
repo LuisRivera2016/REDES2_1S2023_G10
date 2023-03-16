@@ -26,9 +26,9 @@
 
 - **_switchport mode access_** : este comando establece el puerto en modo acceso.
 
-- **_int port-channel <id>_** : este comando crea un port-channel con el id especificado si no existe y entra a su modo de configuración.
+- **_int port-channel #_** : este comando crea un port-channel con el id especificado si no existe y entra a su modo de configuración.
 
-- **_channel-group <id> mode <on/active>_** : este comando debe aplicarse a una interfaz fisica o a un rango de interfaces fisicas, y se añadiran las interfaces al port-channel en el modo especificado, el modo on es el modo default que es pasivo y el active hace negociaciones con otro switch de forma automatica.
+- **_channel-group # mode <on/active>_** : este comando debe aplicarse a una interfaz fisica o a un rango de interfaces fisicas, y se añadiran las interfaces al port-channel en el modo especificado, el modo on es el modo default que es pasivo y el active hace negociaciones con otro switch de forma automatica.
 
 
 ## Configuracion Topologia
