@@ -31,7 +31,7 @@
 - **_channel-group # mode <on/active>_** : este comando debe aplicarse a una interfaz fisica o a un rango de interfaces fisicas, y se añadiran las interfaces al port-channel en el modo especificado, el modo on es el modo default que es pasivo y el active hace negociaciones con otro switch de forma automatica.
 
 ## Topologia
-![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/img/Practica2/Topologia.jpg)
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/Topologia.jpg)
 
 ## Configuracion Topologia
 
