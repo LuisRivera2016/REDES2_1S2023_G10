@@ -265,6 +265,15 @@ switchport access vlan 70
 description ACC_VLAN70
 exit
 ```
+# Configuracion de Protocolo OSPF
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/OSPF.png)
+
+comandos para iniciar el proceso de configuracion
+```sh
+Router(config)#router ospf [ID DE PROCESO](1)
+Router(config-router)#network [IP DE RED][WILDCARD DE LA RED] area[ID DE AREA](2)
+Router(config-router)#exit
+```
 
 # Configuracion Protocolo EIGRP
 Este protocolo se aplicara entre las VLAN de Soporte(Corporativo - Informatica) y de la VLAN de Distribucion.
