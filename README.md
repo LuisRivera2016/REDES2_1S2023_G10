@@ -268,12 +268,26 @@ exit
 # Configuracion de Protocolo OSPF
 ![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/OSPF1.png)
 
-comandos para iniciar el proceso de configuracion
+####Entra al modo de configuración Global
 ```sh
-Router(config)#router ospf [ID DE PROCESO](1)
-Router(config-router)#network [IP DE RED][WILDCARD DE LA RED] area[ID DE AREA](2)
-Router(config-router)#exit
+Switch#configure terminal
+
+Switch#configure terminal
 ```
+####Activa el protocolo OSPF en el Cisco Router. El (10) identifica el Process ID.
+
+```sh
+Switch(config)#router ospf 10
+
+Switch(config)#router ospf 10
+```
+
+####El comando Network activa el protocolo OSPF en todas las interfaces del router que su dirección IP estén dentro del rango de la red 
+
+####0.0.0.255 identifica el Wildcard. Un Wildcard es lo contrario de una máscara de red. Los bits que están en cero son los bits de la dirección de red que se van a tomar en cuenta.
+
+####Los bits puestos en uno (255) no se toman en cuenta. El argumento área 10 indica el área a la que pertenece la interfaz del router.
+
 
 # Configuracion Protocolo EIGRP
 Este protocolo se aplicara entre las VLAN de Soporte(Corporativo - Informatica) y de la VLAN de Distribucion.
