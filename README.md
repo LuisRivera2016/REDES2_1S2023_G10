@@ -282,11 +282,11 @@ Switch(config)#router ospf 10
 Switch(config)#router ospf 10
 ```
 
-####El comando Network activa el protocolo OSPF en todas las interfaces del router que su dirección IP estén dentro del rango de la red 
+#### El comando Network activa el protocolo OSPF en todas las interfaces del router que su dirección IP estén dentro del rango de la red 
 
-####0.0.0.255 identifica el Wildcard. Un Wildcard es lo contrario de una máscara de red. Los bits que están en cero son los bits de la dirección de red que se van a tomar en cuenta.
+#### 0.0.0.255 identifica el Wildcard. Un Wildcard es lo contrario de una máscara de red. Los bits que están en cero son los bits de la dirección de red que se van a tomar en cuenta.
 
-####Los bits puestos en uno (255) no se toman en cuenta. El argumento área 10 indica el área a la que pertenece la interfaz del router.
+#### Los bits puestos en uno (255) no se toman en cuenta. El argumento área 10 indica el área a la que pertenece la interfaz del router.
 
 
 # Configuracion Protocolo EIGRP
