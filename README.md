@@ -259,7 +259,48 @@ exit
 ```
 
 # Configuracion Protocolo EIGRP
+Este protocolo se aplicara entre las VLAN de Soporte(Corporativo - Informatica) y de la VLAN de Distribucion.
 
+## Pasos
+### Identificar Segmentos
+10.0.0.2 - 10.0.0.3
+
+### SW2 
+```sh
+enable
+conf t
+ip routing
+router eigrp 10
+network 10.0.0.0
+network 192.168.12.0
+network 192.168.13.0
+no auto-summary
+exit
+wr
+```
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/EIGRP_Peten.jpg)
+
+### SW3
+```sh
+enable
+conf t
+ip routing
+router eigrp 10
+network 10.0.0.0
+network 192.168.12.0
+network 192.168.13.0
+no auto-summary
+exit
+wr
+```
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/EIGRP_AltaV.jpg)
+
+## Ping entre VLANS
+### Soporte - Informatica
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/ping_soporte-inform.jpg)
+### Informatica - Soporte
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/ping_inform-soporte.jpg)
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/ping_infor-soporte2.jpg)
 
 # Configuracion LACP
 Para configurar el link-aggregation, la definición del port-channel debe coincidir con la configuración de las interfaces físicas, en este caso del switchport y del modo acceso.
