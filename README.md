@@ -17,6 +17,11 @@
 
 - **Modo Access** : Es un tipo de configuración en el puerto que permite pasar solo una Vlan, los paquetes no van etiquetados, y por lo general se usa para conectar dispositivos finales.
 
+- **OSPF** : Es un protocolo de enrutamiento de red de estado de enlace (Link State Routing) que se utiliza para determinar la mejor ruta para enviar paquetes de datos a través de una red IP..
+
+- **EIGRP** : Es un protocolo de enrutamiento de red de estado de enlace (Link State Routing) que se utiliza para determinar la mejor ruta para enviar paquetes de datos a través de una red IP.
+
+- **LACP** : Es un protocolo de control de agregación de enlaces utilizado para combinar múltiples enlaces de red en un solo canal lógico de mayor ancho de banda y redundancia.
 
 ## Glosario de Comandos utilizados 
 
