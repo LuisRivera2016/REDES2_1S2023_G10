@@ -30,6 +30,8 @@
 
 - **_channel-group # mode <on/active>_** : este comando debe aplicarse a una interfaz fisica o a un rango de interfaces fisicas, y se añadiran las interfaces al port-channel en el modo especificado, el modo on es el modo default que es pasivo y el active hace negociaciones con otro switch de forma automatica.
 
+## Topologia
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/documentation/img/Practica2/Topologia.jpg)
 
 ## Configuracion Topologia
 
@@ -255,6 +257,9 @@ switchport access vlan 70
 description ACC_VLAN70
 exit
 ```
+
+# Configuracion Protocolo EIGRP
+
 
 # Configuracion LACP
 Para configurar el link-aggregation, la definición del port-channel debe coincidir con la configuración de las interfaces físicas, en este caso del switchport y del modo acceso.
