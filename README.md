@@ -266,7 +266,7 @@ description ACC_VLAN70
 exit
 ```
 # Configuracion de Protocolo OSPF
-![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/OSPF.png)
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/OSPF1.png)
 
 comandos para iniciar el proceso de configuracion
 ```sh
