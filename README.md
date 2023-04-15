@@ -1,4 +1,4 @@
-## Practica 2 Redes de Computadoras 2 Grupo #10
+## Proyecto 1 Redes de Computadoras 2 Grupo #10
 
 | Grupo| Carnet | Nombre |
 | --- | --- | --- |
@@ -19,7 +19,7 @@
 
 - **OSPF** : Es un protocolo de enrutamiento de red de estado de enlace (Link State Routing) que se utiliza para determinar la mejor ruta para enviar paquetes de datos a través de una red IP..
 
-- **EIGRP** : Es un protocolo de enrutamiento de red de estado de enlace (Link State Routing) que se utiliza para determinar la mejor ruta para enviar paquetes de datos a través de una red IP.
+
 
 - **LACP** : Es un protocolo de control de agregación de enlaces utilizado para combinar múltiples enlaces de red en un solo canal lógico de mayor ancho de banda y redundancia.
 
@@ -39,381 +39,61 @@
 
 
 ## Topologia
-![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/Topologia.jpg)
 
-## Configuracion Topologia
 
-### MSW1
+# Protocolo HRSP
+HSRP funciona en un esquema Activo/Pasivo (Active/Standby) donde el dispositivo Activo se encarga de rutear todo el tráfico, mientras que el router Pasivo sólo está esperando.
 
+Si el dispositivo Activo falla, el router Pasivo dejaría de recibir los mensajes del Activo y, asumiría que dejo de funcionar o se apago, etc. por lo que tomaría el rol de Activo para seguir rutenado todo el tráfico y no causar una disrupción en el servicio
+
+##  cómo se elige al router Activo?
+
+Cada dispositivo dentro de HSRP se le asigna una prioridad que puede ir desde 0 hasta 255, entre más alta sea la prioridad, mejor. Si dicha prioridad no se asigna de manera manual, automáticamente será asignada la prioridad por defecto
+
+## Configuracion HRSP
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Proyecto1/HRSP.png)
+
+el protocolo sera configurado en 2 edificios donde el cuadro azul identifica a los SW que tomaran parte del funcionamiento de este, para ello el rol de Activo lo tomaran los SW que se encuentran en la izq y los de la derecha formaran parte del standby
+
+### configuracion del edificio 1 
 ```sh
+#Router Activo
 enable
-configure terminal
+config t
+interface vlan 30
+standby 5 ip 10.0.0.13
+standby 5 priority 150
+standby 5 preempt
 ```
-
-Configuración de VLANS
-```sh
-vlan 70
-name CORPORATIVO
-exit
-
-vlan 20
-name VENTAS
-exit
-```
-
-Configuración de Interfaces VLAN
-```sh
-int vlan 70
-ip address 192.168.11.1 255.255.255.0
-no shutdown
-exit
-
-int vlan 20
-ip address 1.1.1.2 255.0.0.0
-no shutdown
-exit
-```
-
-Configuración de Interfaces en Modo Access
-```sh
-int range f 0/2-3
-switchport mode access
-switchport access vlan 70
-description ACC_VLAN70
-exit
-
-int f 0/4
-switchport mode access
-switchport access vlan 20
-description ACC_VLAN20
-exit
-```
-
-### MSW2
+el activo tendra una prioridad de 150 mientras que el secundario tendra la prioridad por defecto, ambos dispositivos perteneceran al grupo 5 que fue elegido arbitrariamente
 
 ```sh
+#Router Pasivo
 enable
-configure terminal
+config t
+interface vlan 30
+standby 5 ip 10.0.0.13
+standby 5 preempt
 ```
 
-Configuración de VLANS
-```sh
-vlan 70
-name CORPORATIVO
-exit
-
-vlan 20
-name VENTAS
-exit
-
-vlan 30
-name DISTRIBUCION
-exit
-```
-
-Configuración de Interfaces VLAN
-```sh
-int vlan 70
-ip address 192.168.12.1 255.255.255.0
-no shutdown
-exit
-
-int vlan 20
-ip address 1.1.1.3 255.0.0.0
-no shutdown
-exit
-
-int vlan 30
-ip address 10.0.0.2 255.0.0.0
-no shutdown
-exit
-```
-
-Configuración de Interfaces en Modo Access
-```sh
-int range f 0/3-4
-switchport mode access
-switchport access vlan 70
-description ACC_VLAN70
-exit
-
-int f 0/2
-switchport mode access
-switchport access vlan 20
-description ACC_VLAN20
-exit
-
-int f 0/5
-switchport mode access
-switchport access vlan 30
-description ACC_VLAN30
-exit
-```
-
-### MSW3
+### configuracion del edificio 2
 
 ```sh
+#Router Activo
 enable
-configure terminal
+config t
+interface vlan 30
+standby 6 ip 10.0.0.14
+standby 6 priority 150
+standby 6 preempt
 ```
-
-Configuración de VLANS
-```sh
-vlan 70
-name CORPORATIVO
-exit
-
-vlan 30
-name DISTRIBUCION
-exit
-```
-
-Configuración de Interfaces VLAN
-```sh
-int vlan 70
-ip address 192.168.13.1 255.255.255.0
-no shutdown
-exit
-
-int vlan 30
-ip address 10.0.0.3 255.0.0.0
-no shutdown
-exit
-```
-
-Configuración de Interfaces en Modo Access
-```sh
-int range f 0/3-4
-switchport mode access
-switchport access vlan 70
-description ACC_VLAN70
-exit
-
-
-int f 0/2
-switchport mode access
-switchport access vlan 30
-description ACC_VLAN30
-exit
-```
-
-### SW1
+el activo tendra una prioridad de 150 mientras que el secundario tendra la prioridad por defecto, ambos dispositivos perteneceran al grupo 6 que fue elegido arbitrariamente
 
 ```sh
+#Router Pasivo
 enable
-configure terminal
-```
-
-Configuración de VLANS
-```sh
-vlan 70
-name CORPORATIVO
-exit
-```
-
-Configuración de Interfaces en Modo Access
-```sh
-int range f 0/2-6
-switchport mode access
-switchport access vlan 70
-description ACC_VLAN70
-exit
-```
-
-### SW2
-
-```sh
-enable
-configure terminal
-```
-
-Configuración de VLANS
-```sh
-vlan 70
-name CORPORATIVO
-exit
-```
-
-Configuración de Interfaces en Modo Access
-```sh
-int range f 0/2-4
-switchport mode access
-switchport access vlan 70
-description ACC_VLAN70
-exit
-```
-
-### SW3
-
-```sh
-enable
-configure terminal
-```
-
-Configuración de VLANS
-```sh
-vlan 70
-name CORPORATIVO
-exit
-```
-
-Configuración de Interfaces en Modo Access
-```sh
-int range f 0/2-5
-switchport mode access
-switchport access vlan 70
-description ACC_VLAN70
-exit
-```
-# Configuracion de Protocolo OSPF
-![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/OSPF1.png)
-
-####Entra al modo de configuración Global
-```sh
-Switch#configure terminal
-
-Switch#configure terminal
-```
-####Activa el protocolo OSPF en el Cisco Router. El (10) identifica el Process ID.
-
-```sh
-Switch(config)#router ospf 10
-
-Switch(config)#router ospf 10
-```
-
-#### El comando Network activa el protocolo OSPF en todas las interfaces del router que su dirección IP estén dentro del rango de la red 
-
-#### 0.0.0.255 identifica el Wildcard. Un Wildcard es lo contrario de una máscara de red. Los bits que están en cero son los bits de la dirección de red que se van a tomar en cuenta.
-
-#### Los bits puestos en uno (255) no se toman en cuenta. El argumento área 10 indica el área a la que pertenece la interfaz del router.
-
-
-# Configuracion Protocolo EIGRP
-Este protocolo se aplicara entre las VLAN de Soporte(Corporativo - Informatica) y de la VLAN de Distribucion.
-
-## Pasos
-### Identificar Segmentos
-10.0.0.2 - 10.0.0.3
-
-### SW2 
-```sh
-enable
-conf t
-ip routing
-router eigrp 10
-network 10.0.0.0
-network 192.168.12.0
-network 192.168.13.0
-no auto-summary
-exit
-wr
-```
-![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/EIGRP_Peten.jpg)
-
-### SW3
-```sh
-enable
-conf t
-ip routing
-router eigrp 10
-network 10.0.0.0
-network 192.168.12.0
-network 192.168.13.0
-no auto-summary
-exit
-wr
-```
-![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/EIGRP_AltaV.jpg)
-
-## Ping entre VLANS
-### Soporte - Informatica
-![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/ping_soporte-inform.jpg)
-### Informatica - Soporte
-![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/ping_inform-soporte.jpg)
-![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Practica2/ping_infor-soporte2.jpg)
-
-# Configuracion LACP
-Para configurar el link-aggregation, la definición del port-channel debe coincidir con la configuración de las interfaces físicas, en este caso del switchport y del modo acceso.
-
-## Huehuetenango
-### MSW1
-
-```sh
-ena
-conf t
-int port-channel 1
-switchport access vlan 70
-switchport mode access
-switchport nonegotiate
-
-int range f0/2-3
-channel-group 1 mode active
-```
-
-### SW1
-```sh
-ena
-conf t
-int port-channel 1
-switchport access vlan 70
-switchport mode access
-
-int range f0/5-6
-channel-group 1 mode active
-```
-
-
-## Petén
-### MSW2
-
-```sh
-ena
-conf t
-int port-channel 1
-switchport access vlan 70
-switchport mode access
-switchport nonegotiate
-
-int range f0/3-4
-channel-group 1 mode active
-```
-
-### SW2
-```sh
-ena
-conf t
-int port-channel 1
-switchport access vlan 70
-switchport mode access
-
-int range f0/3-4
-channel-group 1 mode active
-```
-
-## Alta Verapaz
-### MSW3
-
-```sh
-ena
-conf t
-int port-channel 1
-switchport access vlan 70
-switchport mode access
-switchport nonegotiate
-
-int range f0/3-4
-channel-group 1 mode active
-```
-
-### SW3
-```sh
-ena
-conf t
-int port-channel 1
-switchport access vlan 70
-switchport mode access
-
-int range f0/4-5
-channel-group 1 mode active
+config t
+interface vlan 30
+standby 6 ip 10.0.0.14
+standby 6 preempt
 ```
