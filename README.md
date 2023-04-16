@@ -17,8 +17,11 @@
 
 - **Modo Access** : Es un tipo de configuración en el puerto que permite pasar solo una Vlan, los paquetes no van etiquetados, y por lo general se usa para conectar dispositivos finales.
 
-- **OSPF** : Es un protocolo de enrutamiento de red de estado de enlace (Link State Routing) que se utiliza para determinar la mejor ruta para enviar paquetes de datos a través de una red IP..
+- **Modo Trunk** : Permite manejar el tráfico de distintas VLAN en un mismo puerto.
 
+- **Inter-VLAN Routing** : Nos brinda la facilidad de utilizar solo una interfaz para enrrutar los paquetes de varias VLANs que viajan a través del switch conectado a esa interfaz.
+
+- **OSPF** : Es un protocolo de enrutamiento de red de estado de enlace (Link State Routing) que se utiliza para determinar la mejor ruta para enviar paquetes de datos a través de una red IP..
 
 
 - **LACP** : Es un protocolo de control de agregación de enlaces utilizado para combinar múltiples enlaces de red en un solo canal lógico de mayor ancho de banda y redundancia.
@@ -38,8 +41,493 @@
 - **_switchport mode access_** : este comando establece el puerto en modo acceso.
 
 
-## Topologia
+# Topologia
 
+
+# Configuración VLAN
+
+### MSW1
+```sh
+#Configuracion de VLANS
+vlan 10
+name INFORMATICA
+exit
+
+vlan 20
+name VENTAS
+exit
+
+vlan 30
+name CONEXION
+exit
+
+vlan 5
+name WEB
+exit
+
+#Configuracion de VTP server
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode server
+exit
+
+#Configuracion puertos modo trunk
+interface range gigabitEthernet 1/1/1-2
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuracion de puertos modo access
+interface gigabitEthernet 1/0/1
+switchport mode access
+switchport access vlan 10
+description ACC_VLAN10
+exit
+
+interface gigabitEthernet 1/0/2
+switchport mode access
+switchport access vlan 20
+description ACC_VLAN20
+exit
+
+#Configuración de Interfaces VLAN
+interface vlan 10
+ip address 192.168.10.1 255.255.255.0
+no shutdown
+exit
+
+interface vlan 20
+ip address 192.168.20.1 255.255.255.0
+no shutdown
+exit
+
+interface vlan 30
+ip address 10.0.0.1 255.0.0.0
+no shutdown
+exit
+```
+
+### MSW2
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface range gigabitEthernet 1/0/1-3
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+interface range gigabitEthernet 1/1/1-3
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuración de Interfaces VLAN
+interface vlan 30
+ip address 10.0.0.2 255.0.0.0
+no shutdown
+exit
+
+```
+
+### MSW3
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface range gigabitEthernet 1/1/1-2
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuracion de puertos modo access
+interface gigabitEthernet 1/0/1
+switchport mode access
+switchport access vlan 5
+description ACC_VLAN5
+exit
+
+#Configuración de Interfaces VLAN
+int vlan 5
+ip address 192.168.30.1 255.255.255.0
+no shutdown
+exit
+
+interface vlan 30
+ip address 10.0.0.4 255.0.0.0
+no shutdown
+exit
+
+```
+
+### MSW4
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface range gigabitEthernet 1/0/1-3
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+interface range gigabitEthernet 1/1/1-3
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuración de Interfaces VLAN
+interface vlan 30
+ip address 10.0.0.3 255.0.0.0
+no shutdown
+exit
+```
+
+### MSW5
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface range fastethernet 0/1-5
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuración de Interfaces VLAN
+interface vlan 30
+ip address 10.0.0.5 255.0.0.0
+no shutdown
+exit
+```
+
+### MSW6
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface range fastethernet 0/1-2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuración de Interfaces VLAN
+interface vlan 30
+ip address 10.0.0.6 255.0.0.0
+no shutdown
+exit
+```
+
+### MSW7
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface range fastethernet 0/1-2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+interface range fastethernet 0/3
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1,5,10,1002-1005
+exit
+
+interface range fastethernet 0/4
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1,5,20,1002-1005
+exit
+
+#Configuración de Interfaces VLAN
+interface vlan 10
+ip address 192.168.10.1 255.255.255.0
+no shutdown
+exit
+
+interface vlan 20
+ip address 192.168.20.1 255.255.255.0
+no shutdown
+exit
+
+interface vlan 30
+ip address 10.0.0.7 255.0.0.0
+no shutdown
+exit
+
+int vlan 5
+ip address 192.168.30.1 255.255.255.0
+no shutdown
+exit
+```
+
+### MSW8
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface range fastethernet 0/1-2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuración de Interfaces VLAN
+interface vlan 30
+ip address 10.0.0.8 255.0.0.0
+no shutdown
+exit
+```
+
+### MSW9
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface range fastethernet 0/1-5
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuración de Interfaces VLAN
+interface vlan 30
+ip address 10.0.0.9 255.0.0.0
+no shutdown
+exit
+
+```
+
+### MSW10
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface range fastethernet 0/1-2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuración de Interfaces VLAN
+interface vlan 30
+ip address 10.0.0.10 255.0.0.0
+no shutdown
+exit
+```
+
+### MSW11
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface range fastethernet 0/1-2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+interface range fastethernet 0/3
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1,5,20,1002-1005
+exit
+
+interface range fastethernet 0/4
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1,5,10,1002-1005
+exit
+
+#Configuración de Interfaces VLAN
+interface vlan 10
+ip address 192.168.10.1 255.255.255.0
+no shutdown
+exit
+
+interface vlan 20
+ip address 192.168.20.1 255.255.255.0
+no shutdown
+exit
+
+interface vlan 30
+ip address 10.0.0.11 255.0.0.0
+no shutdown
+exit
+
+int vlan 5
+ip address 192.168.30.1 255.255.255.0
+no shutdown
+exit
+```
+
+### MSW12
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface range fastethernet 0/1-2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuración de Interfaces VLAN
+interface vlan 30
+ip address 10.0.0.12 255.0.0.0
+no shutdown
+exit
+```
+
+### SW1
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface fastethernet 0/1
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuracion de puertos modo access
+int range fastethernet 0/2-3
+switchport mode access
+switchport access vlan 10
+description ACC_VLAN10
+exit
+```
+
+### SW2
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface fastethernet 0/1
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuracion de puertos modo access
+int range fastethernet 0/2-3
+switchport mode access
+switchport access vlan 20
+description ACC_VLAN20
+exit
+```
+
+### SW3
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface fastethernet 0/1
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuracion de puertos modo access
+int range f 0/2-3
+switchport mode access
+switchport access vlan 20
+description ACC_VLAN20
+exit
+```
+
+### SW4
+```sh
+#Configuracion de VTP client
+vtp version 2
+vtp domain g10
+vtp password g10
+vtp mode client
+exit
+
+#Configuración puertos modo trunk
+interface fastethernet 0/1
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+#Configuracion de puertos modo access
+int range f 0/2-3
+switchport mode access
+switchport access vlan 10
+description ACC_VLAN10
+exit
+```
 
 # Protocolo HRSP
 HSRP funciona en un esquema Activo/Pasivo (Active/Standby) donde el dispositivo Activo se encarga de rutear todo el tráfico, mientras que el router Pasivo sólo está esperando.
