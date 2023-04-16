@@ -43,6 +43,8 @@
 
 # Topologia
 
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Proyecto1/topo.jpg)
+
 # Configuración Servidores
 
 ### DHCP1
@@ -542,6 +544,21 @@ switchport mode access
 switchport access vlan 10
 description ACC_VLAN10
 exit
+```
+# Configuracion OSPF
+Se configuro el protocolo OSPF en cada Switch capa 3.
+
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Proyecto1/OspfComandos.jpg)
+
+### configuracion SW1
+```sh
+#Router Activo
+enable
+config t
+interface vlan 30
+standby 5 ip 10.0.0.13
+standby 5 priority 150
+standby 5 preempt
 ```
 
 # Protocolo HRSP
