@@ -43,6 +43,21 @@
 
 # Topologia
 
+# Configuración Servidores
+
+### DHCP1
+Se le asigno al primer servidor DHCP la ip 192.168.10.2 con gateway 192.168.10.1 y mascara 255.255.255.0 y finalmente se activo el servicio DHCP que permite un total 200 usuarios en la red de la VLAN 10. 
+
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Proyecto1/DHCP1.PNG)
+
+### DHCP2
+Se le asigno al primer servidor DHCP la ip 192.168.20.2 con gateway 192.168.20.1 y mascara 255.255.255.0 y finalmente se activo el servicio DHCP que permite un total 200 usuarios en la red de la VLAN 20. 
+
+![](https://github.com/LuisRivera2016/REDES2_1S2023_G10/blob/main/img/Proyecto1/DHCP2.PNG)
+
+### WEB
+
+Se le asigno al primer servidor DHCP la ip 192.168.30.2 con gateway 192.168.30.1 y mascara 255.255.255.0 y se le activo el servicio HTTP para poder acceder a este servidor web donde se muestra la información de los integrantes del grupo.
 
 # Configuración VLAN
 
