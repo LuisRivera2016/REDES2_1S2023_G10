@@ -40,6 +40,12 @@
 
 - **_switchport mode access_** : este comando establece el puerto en modo acceso.
 
+- **_do show ip roure_** : visualizar la base de datos de ips de reenvio.
+
+- **_router ospf #_** : acceder a la configuracion ospf de nuestro router.
+
+- **_network direcionIp Wildcard area#_** : agregar una ip a nuestra configuracion ospf al area indicada.
+
 
 # Topologia
 
@@ -552,13 +558,155 @@ Se configuro el protocolo OSPF en cada Switch capa 3.
 
 ### configuracion SW1
 ```sh
-#Router Activo
 enable
 config t
-interface vlan 30
-standby 5 ip 10.0.0.13
-standby 5 priority 150
-standby 5 preempt
+ip routing
+do show ip route
+router ospf 10
+network 10.0.0.0 0.255.255.255 area 10
+network 192.168.10.0 0.0.0.255 area 10
+network 192.168.20.0 0.0.0.255 area 10
+network 192.168.30.0 0.0.0.255 area 10
+```
+
+### configuracion SW2
+```sh
+enable
+config t
+ip routing
+do show ip route
+router ospf 10
+network 10.0.0.0 0.255.255.255 area 10
+network 192.168.10.0 0.0.0.255 area 10
+network 192.168.20.0 0.0.0.255 area 10
+network 192.168.30.0 0.0.0.255 area 10
+```
+
+### configuracion SW3
+```sh
+enable
+config t
+ip routing
+do show ip route
+router ospf 10
+network 10.0.0.0 0.255.255.255 area 10
+network 192.168.10.0 0.0.0.255 area 10
+network 192.168.20.0 0.0.0.255 area 10
+network 192.168.30.0 0.0.0.255 area 10
+```
+
+### configuracion SW4
+```sh
+enable
+config t
+ip routing
+do show ip route
+router ospf 10
+network 10.0.0.0 0.255.255.255 area 10
+network 192.168.10.0 0.0.0.255 area 10
+network 192.168.20.0 0.0.0.255 area 10
+network 192.168.30.0 0.0.0.255 area 10
+```
+
+### configuracion SW5
+```sh
+enable
+config t
+ip routing
+do show ip route
+router ospf 10
+network 10.0.0.0 0.255.255.255 area 10
+network 192.168.10.0 0.0.0.255 area 10
+network 192.168.20.0 0.0.0.255 area 10
+network 192.168.30.0 0.0.0.255 area 10
+```
+
+### configuracion SW6
+```sh
+enable
+config t
+ip routing
+do show ip route
+router ospf 10
+network 10.0.0.0 0.255.255.255 area 10
+network 192.168.10.0 0.0.0.255 area 10
+network 192.168.20.0 0.0.0.255 area 10
+network 192.168.30.0 0.0.0.255 area 10
+```
+
+### configuracion SW7
+```sh
+enable
+config t
+ip routing
+do show ip route
+router ospf 10
+network 10.0.0.0 0.255.255.255 area 10
+network 192.168.10.0 0.0.0.255 area 10
+network 192.168.20.0 0.0.0.255 area 10
+network 192.168.30.0 0.0.0.255 area 10
+```
+
+### configuracion SW8
+```sh
+enable
+config t
+ip routing
+do show ip route
+router ospf 10
+network 10.0.0.0 0.255.255.255 area 10
+network 192.168.10.0 0.0.0.255 area 10
+network 192.168.20.0 0.0.0.255 area 10
+network 192.168.30.0 0.0.0.255 area 10
+```
+
+### configuracion SW9
+```sh
+enable
+config t
+ip routing
+do show ip route
+router ospf 10
+network 10.0.0.0 0.255.255.255 area 10
+network 192.168.10.0 0.0.0.255 area 10
+network 192.168.20.0 0.0.0.255 area 10
+network 192.168.30.0 0.0.0.255 area 10
+```
+
+### configuracion SW10
+```sh
+enable
+config t
+ip routing
+do show ip route
+router ospf 10
+network 10.0.0.0 0.255.255.255 area 10
+```
+
+### configuracion SW11
+```sh
+enable
+config t
+ip routing
+do show ip route
+router ospf 10
+network 10.0.0.0 0.255.255.255 area 10
+network 192.168.10.0 0.0.0.255 area 10
+network 192.168.20.0 0.0.0.255 area 10
+network 192.168.30.0 0.0.0.255 area 10
+```
+
+### configuracion SW12
+```sh
+enable
+config t
+ip routing
+do show ip route
+router ospf 10
+network 10.0.0.0 0.255.255.255 area 10
+network 192.168.10.0 0.0.0.255 area 10
+network 192.168.20.0 0.0.0.255 area 10
+network 192.168.30.0 0.0.0.255 area 10
 ```
 
 # Protocolo HRSP
