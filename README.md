@@ -23,7 +23,6 @@
 
 - **OSPF** : Es un protocolo de enrutamiento de red de estado de enlace (Link State Routing) que se utiliza para determinar la mejor ruta para enviar paquetes de datos a través de una red IP..
 
-
 - **LACP** : Es un protocolo de control de agregación de enlaces utilizado para combinar múltiples enlaces de red en un solo canal lógico de mayor ancho de banda y redundancia.
 
 ## Glosario de Comandos utilizados 
@@ -765,3 +764,52 @@ interface vlan 30
 standby 6 ip 10.0.0.14
 standby 6 preempt
 ```
+
+# Configuracion LACP
+Para configurar el link-aggregation, la definición del port-channel debe coincidir con la configuración de las interfaces físicas, en este caso del switchport y la configuración del modo troncal.
+
+## Edificio 1
+### MSW2
+ena
+conf t
+int port-channel 1
+switchport mode trunk
+switchport trunk allowed vlan all
+
+interface range gigabitEthernet 1/0/1-3
+channel-group 1 mode active
+
+
+### MSW5
+ena
+conf t
+int port-channel 1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+
+interface range fastethernet 0/1-3
+channel-group 1 mode active
+
+## Edificio 2
+### MSW4
+ena
+conf t
+int port-channel 1
+switchport mode trunk
+switchport trunk allowed vlan all
+
+interface range gigabitEthernet 1/0/1-3
+channel-group 1 mode active
+
+
+### MSW9
+ena
+conf t
+int port-channel 1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+
+interface range fastethernet 0/1-3
+channel-group 1 mode active
