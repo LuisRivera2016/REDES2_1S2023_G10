@@ -1,17 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Route, Routes } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import Administrador from "./pages/Adminstrador";
+import Desarrollador from "./pages/Desarrollador";
+import Home from "./pages/Home";
+import NoExiste from "./pages/NoExiste";
+
 import './App.css'
+
 
 function App() {
  
 
   return (
-    <>
-      
-      <h1>Cerberus</h1>
-      
-    </>
+    <div>
+      <h1>Navbar</h1>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/administrador" element={<Administrador/>} />
+        <Route path="/desarrollador" element={<Desarrollador/>} />
+        <Route path="*" element={<NoExiste/>} />
+      </Routes>
+    
+    </div>
   )
 }
 
