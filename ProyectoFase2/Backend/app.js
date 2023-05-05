@@ -5,13 +5,14 @@ const app = express()
 const cors = require('cors')
 
 //define here the routers
-//const CerberusRouter = require('./controllers/Cerberus')
+const CerberusRoute = require('./controllers/cerberus')
 
 
 app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
 
-//app.use('api/v1/Cerberus', CerberusRouter)
+
+app.use('api/v1/Cerberus', CerberusRoute)
 
 module.exports = app
