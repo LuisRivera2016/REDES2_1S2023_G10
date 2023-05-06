@@ -6,7 +6,7 @@ function Desarrollador() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/v1/Cerberus/consulta2").then((response) => {
+    axios.get("http://100.26.21.127:5000/api/v1/Cerberus/consulta2").then((response) => {
       setData(response.data);
     }).catch((error) => {
       console.log(error);
