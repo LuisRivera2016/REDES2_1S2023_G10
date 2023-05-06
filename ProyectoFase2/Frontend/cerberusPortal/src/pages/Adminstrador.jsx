@@ -2,11 +2,13 @@ import { useState, useEffect } from "react"
 import SubCards from "../components/SubCards"
 import axios from "axios"
 
+import {ipBackend} from "../config.js"
+
 function Adminstrador() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://100.26.21.127:5000/api/v1/Cerberus/consulta1").then((response) => {
+    axios.get("http://"+ipBackend+":5000/api/v1/Cerberus/consulta1").then((response) => {
       setData(response.data);
     }).catch((error) => {
       console.log(error);
