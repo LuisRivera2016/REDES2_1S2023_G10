@@ -13,6 +13,6 @@ app.use(express.static('build'))
 app.use(express.json())
 
 
-app.use('api/v1/Cerberus', CerberusRoute)
+app.use('/api/v1/Cerberus', CerberusRoute)
 
 module.exports = app
