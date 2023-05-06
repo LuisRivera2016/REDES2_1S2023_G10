@@ -1,7 +1,7 @@
 
 function NoExiste() {
   return (
-    <div>NoExiste</div>
+    <div className="main-content">404 not found</div>
   )
 }
 

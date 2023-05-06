@@ -2,7 +2,7 @@
 
 function Adminstrador() {
   return (
-    <div>Adminstrador</div>
+    <div className="main-content">Adminstrador</div>
   )
 }
 

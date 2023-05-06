@@ -2,7 +2,7 @@
 
 function Desarrollador() {
   return (
-    <div>Desarrollador</div>
+    <div className="main-content">Desarrollador</div>
   )
 }
 
