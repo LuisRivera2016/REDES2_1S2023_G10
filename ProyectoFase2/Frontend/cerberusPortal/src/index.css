@@ -49,5 +49,14 @@ nav {
 }
 
 
+.bitcoin {
+  width: 100%;
+  display: column;
+  align-items: center;
+  justify-content: center;
+}
 
-
+.topo{
+  width: 800px;
+  height: auto;
+}

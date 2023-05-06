@@ -18,6 +18,9 @@ function Navbar() {
                 <li className='nav-item'>
                     <NavLink to="/administrador">Admin</NavLink>
                 </li>
+                <li className='nav-item'>
+                    <NavLink to="/tendencia">Tendencia</NavLink>
+                </li>
             </ul>
         </nav>
     </>
