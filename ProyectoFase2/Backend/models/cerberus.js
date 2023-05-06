@@ -1,12 +1,18 @@
-const mongoose = require('mongoose')
+var database = require('../utils/config');
+var consulta = {};
 
 
+//CONSULTA 1
+consulta.consulta1 = function (callback) {
+    if (database) {
 
-/*
-const cerberusSchema = new mongoose.Schema({
-  //define here the schema
-}) */
+            var query ="SELECT * FROM Administrador";
 
+            database.query(query, function (error, result) {
+                    if (error) console.log(error);
+                    callback(result);
+            });
+    }
+}
 
-
-//module.exports = mongoose.model('Cerberus', cerberusSchema)
+module.exports = consulta;

@@ -1,12 +1,23 @@
-require('dotenv').config()
+const mysql = require('mysql');
 
-const PORT = process.env.PORT || 3000
 
-/*const MONGODB_URI = process.env.NODE_ENV === 'test'
-  ? process.env.TEST_MONGODB_URI
-  : process.env.MONGODB_URI
-*/
-module.exports = {
-  //MONGODB_URI,
-  PORT
-}
+let mysql_parameters =  {
+    host:"100.26.21.127",
+    user:"root",
+    password:"mysql123",
+    database:"CerberusDB",
+    port:"3306",
+    insecureAuth:true
+};
+
+let connection = mysql.createConnection(mysql_parameters);
+
+connection.connect((err)=>{
+    if(err){
+        throw err
+    }else{
+        console.log("CONNECTED");
+    }
+});
+
+module.exports = connection;
