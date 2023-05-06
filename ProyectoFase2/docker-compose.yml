@@ -15,4 +15,4 @@ services:
             dockerfile: Dockerfile
             context: ./Frontend/cerberusPortal
         ports:
-            - 80:80
+            - 80:5173
