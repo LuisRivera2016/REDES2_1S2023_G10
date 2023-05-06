@@ -6,22 +6,22 @@ import Home from "./pages/Home";
 import NoExiste from "./pages/NoExiste";
 
 import './App.css'
+import Navbar from "./components/Navbar";
 
 
 function App() {
  
 
   return (
-    <div>
-      <h1>Navbar</h1>
+    <>
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/administrador" element={<Administrador/>} />
         <Route path="/desarrollador" element={<Desarrollador/>} />
         <Route path="*" element={<NoExiste/>} />
       </Routes>
-    
-    </div>
+    </>
   )
 }
 
